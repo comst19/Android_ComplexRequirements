@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.financialservices.PinActivity" />
+        <activity android:name="com.example.financialservices.IdentityInputActivity" />
+        <activity android:name="com.example.financialservices.VerifyOtpActivity" />
     </application>
 
 </manifest>

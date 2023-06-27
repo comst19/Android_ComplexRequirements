@@ -36,7 +36,7 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures{
-        dataBinding = true
+        dataBinding true
     }
 }
 
@@ -51,4 +51,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'androidx.activity:activity-ktx:1.7.2'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
 }

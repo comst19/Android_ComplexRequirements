@@ -3,6 +3,7 @@ package com.example.financialservices
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.financialservices.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openVerifyOtp(){
-
+        startActivity(Intent(this, IdentityInputActivity::class.java))
     }
 
 
