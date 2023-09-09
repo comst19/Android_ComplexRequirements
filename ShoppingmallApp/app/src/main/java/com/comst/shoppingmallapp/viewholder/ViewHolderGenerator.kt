@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.comst.shoppingmallapp.databinding.ItemEmptyBinding
+import com.comst.shoppingmallapp.model.ViewType
 
 object ViewHolderGenerator {
 
@@ -12,6 +13,9 @@ object ViewHolderGenerator {
         viewType : Int
     ) : BindingViewHolder<*>{
         return when(viewType){
+            ViewType.VIEW_PAGER.ordinal -> ViewPagerViewHolder(parent.toBinding())
+            ViewType.HORIZONTAL.ordinal -> HorizontalViewHolder(parent.toBinding())
+            ViewType.FULL_AD.ordinal -> FullAdViewHolder(parent.toBinding())
             else -> ItemViewHolder(parent.toBinding())
         }
     }
