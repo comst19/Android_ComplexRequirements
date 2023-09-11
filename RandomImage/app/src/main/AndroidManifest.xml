@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.comst.randomimage.mvc.MvcActivity" />
+        <activity android:name="com.comst.randomimage.mvp.MvpActivity" />
     </application>
 
 </manifest>
