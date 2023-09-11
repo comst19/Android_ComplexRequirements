@@ -30,4 +30,5 @@ class ImageProvider(private val callback : Callback) {
     interface Callback{
         fun loadImage(url : String, color : String)
     }
+
 }

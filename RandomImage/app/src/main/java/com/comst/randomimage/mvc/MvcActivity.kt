@@ -22,7 +22,6 @@ class MvcActivity : AppCompatActivity(), ImageProvider.Callback {
             it.view = this
         }
     }
-
     fun loadImage(){
         imageProvider.getRandomImage()
     }
