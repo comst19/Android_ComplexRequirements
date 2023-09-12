@@ -27,6 +27,7 @@
         <activity android:name="com.comst.randomimage.mvc.MvcActivity" />
         <activity android:name="com.comst.randomimage.mvp.MvpActivity" />
         <activity android:name="com.comst.randomimage.mvvm.MvvmActivity" />
+        <activity android:name="com.comst.randomimage.mvi.MviActivity" />
     </application>
 
 </manifest>

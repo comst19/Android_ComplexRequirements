@@ -14,4 +14,8 @@ interface ImageService {
     @Headers("Authorization: Client-ID ${BuildConfig.RANDOM_IMAGE_KEY}")
     @GET("photos/random")
     fun getRandomImageRx() : Single<ImageResponse>
+
+    @Headers("Authorization: Client-ID ${BuildConfig.RANDOM_IMAGE_KEY}")
+    @GET("photos/random")
+    suspend fun getRandomImageSuspend() : ImageResponse
 }
