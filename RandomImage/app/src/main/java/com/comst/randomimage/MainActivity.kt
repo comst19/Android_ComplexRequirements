@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.comst.randomimage.databinding.ActivityMainBinding
 import com.comst.randomimage.mvc.MvcActivity
 import com.comst.randomimage.mvp.MvpActivity
+import com.comst.randomimage.mvvm.MvvmActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openMvvm(){
-
+        startActivity(Intent(this, MvvmActivity::class.java))
     }
 
     fun openMvi(){
