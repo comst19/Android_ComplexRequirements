@@ -5,20 +5,12 @@
 
     <data>
 
-        <variable
-            name="activity"
-            type="com.comst.howlstagram.login.LoginActivity" />
-
-        <variable
-            name="viewModel"
-            type="com.comst.howlstagram.login.LoginViewModel" />
-
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".login.LoginActivity">
+        tools:context=".LoginActivity">
 
         <ImageView
             android:id="@+id/logo_imageview"
@@ -34,82 +26,65 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edittext_id"
+                    android:id="@+id/edittext_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:text="@={viewModel.id}" />
+                    android:hint="@string/phone_number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/edittext_password"
+                    android:id="@+id/edittext_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:text="@={viewModel.password}" />
+                    android:hint="@string/email" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edittext_linearlayout"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/email_login_button"
+                android:id="@+id/find_id_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:onClick="@{() -> activity.loginEmail()}"
-                android:text="@string/signin_email" />
-
+                android:text="@string/find_id" />
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/find_id_password_button"
+                android:id="@+id/find_password_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:onClick="@{() -> activity.findId()}"
-                android:text="@string/find_id_password" />
+                android:text="@string/find_password" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/facebook_login_button"
+                android:layout_marginTop="30dp"
+                android:id="@+id/dismiss_btn"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/btn_signin_facebook"
-                android:text="@string/signin_facebook"
-                android:textColor="@android:color/white" />
+                android:text="@string/close" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/google_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/btn_signin_google"
-                android:text="@string/signin_google"
-                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
