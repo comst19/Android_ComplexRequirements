@@ -6,9 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.comst.howlstagram.R
+import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -50,6 +52,17 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     // 암호화 푸는 코드
     fun firebaseAuthWithGoogle(idToken : String?){
         val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful){
+                showInputNumberActivity.value = true
+            }else{
+                // 아이디가 있을 경우
+            }
+        }
+    }
+
+    fun firebaseAuthWithFacebook(accessToken: AccessToken){
+        val credential = FacebookAuthProvider.getCredential(accessToken.token)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful){
                 showInputNumberActivity.value = true
