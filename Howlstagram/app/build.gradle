@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -50,4 +51,8 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.6.1'
     // 이건 뭐였더라?
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:32.2.3')
+    implementation 'com.google.firebase:firebase-auth-ktx'
 }
