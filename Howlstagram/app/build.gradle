@@ -55,10 +55,14 @@ dependencies {
     //firebase
     implementation platform('com.google.firebase:firebase-bom:32.2.3')
     implementation 'com.google.firebase:firebase-auth-ktx'
+    // firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
 
     // google login
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
 
     // facebook
     implementation 'com.facebook.android:facebook-android-sdk:12.3.0'
+
 }
