@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onSubscription
 import kotlinx.coroutines.flow.stateIn
 import java.util.Calendar
 import kotlin.random.Random
@@ -77,8 +78,12 @@ class GameViewModel(private val stateHandler : SavedStateHandle) : ViewModel() {
     private val _currentScrambledWord = stateHandler.getMutableStateFlow("currentScrambledWord", "")
     val currentScrambledWord: StateFlow<Spannable> = _currentScrambledWord
         .asStateFlow()
-        .map {
-            val scrambledWord = it.toString()
+        .onSubscription {
+            // TODO nextWord() if necessary
+            if (currentWord.isNotEmpty())
+                nextWord()
+        }
+        .map { scrambledWord ->
             val spannable: Spannable = SpannableString(scrambledWord)
             spannable.setSpan(
                 TtsSpan.VerbatimBuilder(scrambledWord).build(),
@@ -100,36 +105,37 @@ class GameViewModel(private val stateHandler : SavedStateHandle) : ViewModel() {
     private var currentWord: String
         get() = stateHandler["currentWord"] ?: ""
         set(value){
+            val tempWord = value.toCharArray()
+            tempWord.shuffle()
+
+            do {
+                tempWord.shuffle()
+            } while (String(tempWord) == value)
+
+            Log.d("Unscramble", "currentWord= $currentWord")
+            _currentScrambledWord.value = String(tempWord)
+            _currentWordCount.value += 1
+            wordsList = wordsList + currentWord
+
             stateHandler["currentWord"] = value
         }
 
     private var isGameOver: Boolean = false
 
 
-    init {
-        getNextWord()
-    }
-
     /*
      * Updates currentWord and currentScrambledWord with the next word.
      */
-    private fun getNextWord() {
-        currentWord = allWordsList.random(Random(Calendar.getInstance().timeInMillis))
-        val tempWord = currentWord.toCharArray()
-        tempWord.shuffle()
-
-        while (String(tempWord).equals(currentWord, false)) {
-            tempWord.shuffle()
-        }
-        if (wordsList.contains(currentWord)) {
-            getNextWord()
-        } else {
-            Log.d("Unscramble", "currentWord= $currentWord")
-            _currentScrambledWord.value = String(tempWord)
-            _currentWordCount.value = _currentWordCount.value.inc()
-            wordsList = wordsList + currentWord
-        }
-    }
+//    private fun getNextWord() {
+//
+//        var nextWord : String
+//        do {
+//            nextWord = allWordsList.random(Random(Calendar.getInstance().timeInMillis))
+//        }while (wordsList.contains(currentWord))
+//
+//        currentWord = nextWord
+//
+//    }
 
     /*
      * Re-initializes the game data to restart the game.
@@ -138,7 +144,7 @@ class GameViewModel(private val stateHandler : SavedStateHandle) : ViewModel() {
         _score.value = 0
         _currentWordCount.value = 0
         wordsList = emptyList()
-        getNextWord()
+        nextWord()
         isGameOver = false
     }
 
@@ -146,7 +152,7 @@ class GameViewModel(private val stateHandler : SavedStateHandle) : ViewModel() {
     * Increases the game score if the player’s word is correct.
     */
     private fun increaseScore() {
-        _score.value = _score.value.plus(SCORE_INCREASE)
+        _score.value += SCORE_INCREASE
     }
 
     /*
@@ -166,7 +172,12 @@ class GameViewModel(private val stateHandler : SavedStateHandle) : ViewModel() {
     */
     fun nextWord(): Boolean {
         return if (_currentWordCount.value < MAX_NO_OF_WORDS) {
-            getNextWord()
+            var nextWord : String
+            do {
+                nextWord = allWordsList.random(Random(Calendar.getInstance().timeInMillis))
+            }while (wordsList.contains(currentWord))
+
+            currentWord = nextWord
             true
         } else {
             isGameOver = true
