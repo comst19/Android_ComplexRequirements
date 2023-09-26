@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.comst.howlstagram.MainActivity
 import com.comst.howlstagram.R
 import com.comst.howlstagram.databinding.ActivityLoginBinding
 import com.facebook.CallbackManager
@@ -97,6 +98,11 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.showFindIdActivity.observe(this){
             if (it){
                 startActivity(Intent(this, FindIdActivity::class.java))
+            }
+        }
+        loginViewModel.showMainActivity.observe(this){
+            if (it){
+                startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }
