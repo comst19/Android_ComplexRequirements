@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.comst.howlstagram.databinding.ActivityAddPhotoBinding
+import com.comst.howlstagram.model.ContentModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -23,7 +26,8 @@ class AddPhotoActivity : AppCompatActivity() {
     }
 
     var storage = FirebaseStorage.getInstance()
-
+    var auth = FirebaseAuth.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
     private lateinit var binding : ActivityAddPhotoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +53,17 @@ class AddPhotoActivity : AppCompatActivity() {
         storagePath.putFile(photoUri!!).continueWithTask {
             return@continueWithTask storagePath.downloadUrl
         }.addOnCompleteListener { downloadUrl ->
-            Toast.makeText(this, "업로드 성공 : ${downloadUrl.result}", Toast.LENGTH_SHORT).show()
-            finish()
+            var contentModel = ContentModel()
+            contentModel.imgUrl = downloadUrl.result.toString()
+            contentModel.explain = binding.addphotoEditEdittext.text.toString()
+            contentModel.uid = auth.uid
+            contentModel.userId = auth.currentUser?.email
+            contentModel.timestamp = System.currentTimeMillis()
+
+            firestore.collection("images").document().set(contentModel).addOnSuccessListener {
+                Toast.makeText(this, "업로드 성공", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 }
