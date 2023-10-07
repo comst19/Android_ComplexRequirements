@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.comst.todoapp.InputViewModel" />
 
     </data>
 
@@ -25,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/contentEdit"
                 android:hint="할 일"
+                android:text="@={viewModel.content}"
                 android:inputType="textMultiLine">
 
                 <requestFocus/>
@@ -46,6 +50,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/memoEdit"
                 android:hint="메모"
+                android:text="@={viewModel.memo}"
                 android:imeOptions="actionDone"
                 android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -63,6 +68,8 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="입력 완료"
+            android:enabled="@{!viewModel.content.empty}"
+            android:onClick="@{() -> viewModel.insertData()}"
             android:backgroundTint="#3ED8EC"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
