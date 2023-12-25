@@ -54,6 +54,9 @@ dependencies {
     // hilt
     implementation 'com.google.dagger:hilt-android:2.44.2'
     kapt 'com.google.dagger:hilt-compiler:2.44.2'
+
+    // coil
+    implementation 'io.coil-kt:coil:2.2.2'
 }
 
 // 힐트 에러

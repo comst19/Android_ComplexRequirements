@@ -1,4 +1,6 @@
-package fastcampus.part3.chapter6.model
+package com.comst.shoppingmall.model
+
+import com.comst.shoppingmall.model.ListItem
 
 
 data class ViewPager(
