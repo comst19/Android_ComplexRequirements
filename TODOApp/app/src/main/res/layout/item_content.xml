@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="com.comst.todoapp.model.ContentEntity" />
 
         <variable
             name="handler"
-            type="fastcampus.part3.chapter7.MainActivity.Handler" />
+            type="com.comst.todoapp.MainActivity.Handler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:checked="@{item.done}"
-            android:onCheckedChanged="@{(button, bool) -> handler.onCheckedItem(item)}"
+            android:onCheckedChanged="@{(button, check) -> handler.onCheckedItem(item, check)}"
             android:text="@{item.content}"
             android:textAppearance="@style/TextAppearance.App.Large.Bold"
             app:layout_constraintEnd_toEndOf="parent"

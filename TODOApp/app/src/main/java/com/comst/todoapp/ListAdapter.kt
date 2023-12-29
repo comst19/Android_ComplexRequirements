@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.comst.todoapp.databinding.ItemContentBinding
 import com.comst.todoapp.model.ContentEntity
 
-class ListAdapter : ListAdapter<ContentEntity, ContentViewHolder>(diffCallback) {
+class ListAdapter(private val handler : MainActivity.Handler) : ListAdapter<ContentEntity, ContentViewHolder>(diffCallback) {
 
     companion object{
         private val diffCallback = object  : DiffUtil.ItemCallback<ContentEntity>(){
@@ -27,7 +27,7 @@ class ListAdapter : ListAdapter<ContentEntity, ContentViewHolder>(diffCallback) 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
         return ContentViewHolder(
-            ItemContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemContentBinding.inflate(LayoutInflater.from(parent.context), parent, false),handler
         )
     }
 
