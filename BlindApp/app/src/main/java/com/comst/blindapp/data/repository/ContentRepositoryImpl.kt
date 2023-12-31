@@ -22,4 +22,13 @@ class ContentRepositoryImpl @Inject constructor(
             false
         }
     }
+
+    override suspend fun update(item: Content): Boolean {
+        return try {
+            contentService.updateItem(item.toRequest())
+            true
+        }catch (e : IOException){
+            false
+        }
+    }
 }
