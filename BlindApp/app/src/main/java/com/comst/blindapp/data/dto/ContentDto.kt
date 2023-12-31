@@ -3,7 +3,6 @@ package com.comst.blindapp.data.dto
 import java.util.Date
 
 data class ContentDto (
-
     val id : Int?= null,
     val title:String,
     val content:String,
